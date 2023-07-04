@@ -5,6 +5,8 @@ import 'package:flutter_advanced/service/log_service..dart';
 import 'package:flutter_advanced/service/prefs_service.dart';
 
 import '../model/user_model.dart';
+import '../service/http_service.dart';
+import '../service/model/post_model.dart';
 import '../service/secure_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,12 +22,28 @@ class _HomePageState extends State<HomePage> {
    void initState() {
 
     super.initState();
-    SecureService.storeApiKey("1234567890123456789012345678901234567890");
-    SecureService. loadApiKey ().then((value) => {
-      LogService.w(value.toString()),
-    });
+   //_apiPostList();
+    var post = Post(id: 1, title: "PDP", body: "Online", userId: 1);
+   // _apiPostCreate (post);
+    //_apiPostUpdate(post);
+    _apiPostDelete(post);
   }
-
+  void _apiPostList(){
+    Network.GET(Network.API_LIST, Network.paramsEmpty()).then((response) => {
+      LogService.i(response.toString()), });
+  }
+  void _apiPostCreate(Post post){
+    Network.POST(Network.API_CREATE, Network.paramsCreate(post)).then((response) => {
+      LogService.i(response.toString()), });
+  }
+  void _apiPostUpdate(Post post){
+    Network.PUT(Network.API_UPDATE+post.id.toString(), Network.paramsUpdate(post)).then((response) => {
+      LogService.i(response.toString()), });
+  }
+  void _apiPostDelete(Post post){
+    Network.DEL(Network.API_DELETE+post.id.toString(), Network.paramsEmpty()).then((response) => {
+      LogService.i(response.toString()), });
+  }
 
 
   @override
