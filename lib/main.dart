@@ -3,6 +3,7 @@ import 'package:flutter_advanced/pages/databases_page.dart';
 import 'package:flutter_advanced/pages/home_page.dart';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_advanced/pages/network_page.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
     routes: {
 
       DatabasePage.id: (context) => const DatabasePage (),
+      NetworkPage.id: (context) => const NetworkPage (),
     });
   }
 }

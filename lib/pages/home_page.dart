@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced/pages/databases_page.dart';
+import 'package:flutter_advanced/pages/network_page.dart';
 import 'package:flutter_advanced/service/log_service..dart';
 import 'package:flutter_advanced/service/prefs_service.dart';
 
@@ -19,34 +20,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
 
-   void initState() {
+  void initState (){
+  super.initState;
+//_apiPostList();
+  var post = Post(id: 1, title: "PDP", body: "Online", userId: 1);
+ // _apiPostCreate (post);
+}
 
-    super.initState();
-   //_apiPostList();
-    var post = Post(id: 1, title: "PDP", body: "Online", userId: 1);
-   // _apiPostCreate (post);
-    //_apiPostUpdate(post);
-    _apiPostDelete(post);
-  }
-  void _apiPostList(){
-    Network.GET(Network.API_LIST, Network.paramsEmpty()).then((response) => {
-      LogService.i(response.toString()), });
-  }
-  void _apiPostCreate(Post post){
-    Network.POST(Network.API_CREATE, Network.paramsCreate(post)).then((response) => {
-      LogService.i(response.toString()), });
-  }
-  void _apiPostUpdate(Post post){
-    Network.PUT(Network.API_UPDATE+post.id.toString(), Network.paramsUpdate(post)).then((response) => {
-      LogService.i(response.toString()), });
-  }
-  void _apiPostDelete(Post post){
-    Network.DEL(Network.API_DELETE+post.id.toString(), Network.paramsEmpty()).then((response) => {
-      LogService.i(response.toString()), });
-  }
+//    void  _apiPostList () {
+//  Network.GET (Network.API_LIST, Network.paramsEmpty()).then((response) => {
+//    LogService.i(response.toString()), });}
+//  void _apiPostCreate (Post post) {
+// Network.POST(Network.API_CREATE, Network.paramsCreate()).then((response) => {
+// LogService.i(response.toString()), });
+// }
 
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container (
@@ -72,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               MaterialButton (
                 color: Colors.blue,
                 onPressed: () {
-
+                  Navigator.pushNamed(context, NetworkPage.id);
                 },
                 child: const Text ("str_networking").tr(), ) ,
 
